@@ -40,7 +40,7 @@ public class DBController {
 			System.out.println(e.getMessage());
 			return null;
 		} catch(Exception e){
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			return null;
 		}
 
