@@ -8,9 +8,6 @@ public class DBController {
 	private String password = "";
 	private static DBController instance = new DBController();
 	
-	private DBController(){
-		
-	}
 	
 	public static DBController getInstance(){
 		return instance;

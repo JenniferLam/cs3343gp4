@@ -7,8 +7,32 @@ import java.io.*;
 
 public class Main {
 
+	
+	
 	public static void main(String[] args){
-		/*For Eddie testing*/
+		
+		
+		System.out.printf("%s", SubjectEnum.);
+		
+		
+		/*
+		Menu menu = new Menu();
+		User user;
+		
+		menu.CreateMenu();
+		user = menu.getUserInput();
+		
+		System.out.println("Total studied: " + user.getTotalStudiedSubject());
+		System.out.println("Total electives studied: " + user.getElectiveNumber());
+		for(int i=0; i<4; i++){
+			System.out.printf("%s: %d \n",user.getStudiedSubjectList().get(i).getName().toString(),user.getStudiedSubjectList().get(i).getResult());
+		}
+		for(int i=4; i< user.getTotalStudiedSubject(); i++){
+			System.out.printf("%s: %d \n",user.getStudiedSubjectList().get(i).getName().toString(),user.getStudiedSubjectList().get(i).getResult());
+		}*/
+		
+		
+		/*For Eddie testing
 		try {
 		ProgrammePreparator pPre = new ProgrammePreparator();
 		List<Programme> plist = pPre.PrepareList();
@@ -84,6 +108,6 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/**/
+		*/
 	}
 }
