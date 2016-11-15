@@ -29,9 +29,9 @@ public class ProgrammePreparator {
 				Programme p = new Programme(rs.getString(1), rs.getString(2), rs.getFloat(4), rs.getFloat(5), rs.getString(6));
 				for(int i=SubjectOffset; i<ColumnSize; i+=2){
 					Subject s;
-					boolean isCompulsory = rs.getString(i+1).equals(new String("Compulsory"));
-					float f = rs.getFloat(i);
-					s = new Subject(rs.getFloat(i), isCompulsory);
+					String isCompulsory = rs.getString(i+1);
+					
+					s = new Subject(SubjectEnum.getSubject((i-8)/2),rs.getFloat(i), isCompulsory);
 					slist.add(s);
 				}
 				if(p.SetSubject(slist))

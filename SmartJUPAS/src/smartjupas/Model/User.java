@@ -34,6 +34,24 @@ public class User {
 		return this.StudiedSubject;
 	}
 	
+	public boolean hasSubject(Subject subject) {
+		for (StudiedSubject ss : this.StudiedSubject) {
+			if (ss.getName() == subject.getName()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int getSubjectScore(Subject subject) {
+		for (StudiedSubject ss : this.StudiedSubject) {
+			if (ss.getName() == subject.getName()) {
+				return ss.getResult();
+			}
+		}
+		return -1;
+	} 
+	
 	public boolean isValid(int code){
 		try{
 			if(SubjectEnum.getSubject(code)== null)
