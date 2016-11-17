@@ -7,6 +7,7 @@ import java.util.List;
 public class User {
 
 	private List<StudiedSubject> StudiedSubject; 
+	private int preferProgrammeType;
 	
 	public User(){
 		StudiedSubject = new ArrayList<StudiedSubject>();
@@ -18,6 +19,10 @@ public class User {
 	
 	public int getTotalStudiedSubject(){
 		return StudiedSubject.size();
+	}
+	
+	public int getPreference(){
+		return preferProgrammeType;
 	}
 	
 	public boolean addStudiedSubject(StudiedSubject s){

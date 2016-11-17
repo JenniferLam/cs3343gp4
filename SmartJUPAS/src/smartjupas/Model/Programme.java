@@ -15,12 +15,13 @@ public class Programme {
 	private int divide;
 	private List<Subject> subjectList;
 
-	private int userScore;
+	private float userScore;
 	private boolean eligibleForUser;
 
-	public Programme(String jscode, String name, float competitors, float median, String formulaId) {
+	public Programme(String jscode, String name, int typeid, float competitors, float median, String formulaId) {
 		this.jscode = jscode;
 		this.name = name;
+		this.typeId = typeid;
 		this.competitors = competitors;
 		this.median = median;
 		this.formulaId = formulaId;
@@ -96,7 +97,7 @@ public class Programme {
 		this.divide = divide;
 	}
 
-	public int getUserScore() {
+	public float getUserScore() {
 		return userScore;
 	}
 
@@ -180,9 +181,9 @@ public class Programme {
 	}
 
 	private void calculate1C4BScore(User user) {
-		List<Integer> notCompulsoryScoreList = new ArrayList<Integer>();
-		List<Integer> either1ScoreList = new ArrayList<Integer>();
-		List<Integer> either2ScoreList = new ArrayList<Integer>();
+		List<Float> notCompulsoryScoreList = new ArrayList<Float>();
+		List<Float> either1ScoreList = new ArrayList<Float>();
+		List<Float> either2ScoreList = new ArrayList<Float>();
 
 		fillScoreList(user, notCompulsoryScoreList, either1ScoreList, either2ScoreList);
 		if (either1ScoreList.size() > 0) {
@@ -196,9 +197,9 @@ public class Programme {
 	}
 
 	private void calculate2C3BScore(User user) {
-		List<Integer> notCompulsoryScoreList = new ArrayList<Integer>();
-		List<Integer> either1ScoreList = new ArrayList<Integer>();
-		List<Integer> either2ScoreList = new ArrayList<Integer>();
+		List<Float> notCompulsoryScoreList = new ArrayList<Float>();
+		List<Float> either1ScoreList = new ArrayList<Float>();
+		List<Float> either2ScoreList = new ArrayList<Float>();
 
 		fillScoreList(user, notCompulsoryScoreList, either1ScoreList, either2ScoreList);
 		if (either1ScoreList.size() > 0) {
@@ -211,9 +212,9 @@ public class Programme {
 	}
 
 	private void calculate4C1XScore(User user) {
-		List<Integer> notCompulsoryScoreList = new ArrayList<Integer>();
-		List<Integer> either1ScoreList = new ArrayList<Integer>();
-		List<Integer> either2ScoreList = new ArrayList<Integer>();
+		List<Float> notCompulsoryScoreList = new ArrayList<Float>();
+		List<Float> either1ScoreList = new ArrayList<Float>();
+		List<Float> either2ScoreList = new ArrayList<Float>();
 
 		fillScoreList(user, notCompulsoryScoreList, either1ScoreList, either2ScoreList);
 
@@ -226,9 +227,9 @@ public class Programme {
 	}
 
 	private void calculate4C2XScore(User user) {
-		List<Integer> notCompulsoryScoreList = new ArrayList<Integer>();
-		List<Integer> either1ScoreList = new ArrayList<Integer>();
-		List<Integer> either2ScoreList = new ArrayList<Integer>();
+		List<Float> notCompulsoryScoreList = new ArrayList<Float>();
+		List<Float> either1ScoreList = new ArrayList<Float>();
+		List<Float> either2ScoreList = new ArrayList<Float>();
 
 		fillScoreList(user, notCompulsoryScoreList, either1ScoreList, either2ScoreList);
 		if (either1ScoreList.size() > 0) {
@@ -242,9 +243,9 @@ public class Programme {
 	}
 
 	private void calculate4C3XScore(User user) {
-		List<Integer> notCompulsoryScoreList = new ArrayList<Integer>();
-		List<Integer> either1ScoreList = new ArrayList<Integer>();
-		List<Integer> either2ScoreList = new ArrayList<Integer>();
+		List<Float> notCompulsoryScoreList = new ArrayList<Float>();
+		List<Float> either1ScoreList = new ArrayList<Float>();
+		List<Float> either2ScoreList = new ArrayList<Float>();
 
 		fillScoreList(user, notCompulsoryScoreList, either1ScoreList, either2ScoreList);
 		if (either1ScoreList.size() > 0) {
@@ -257,32 +258,32 @@ public class Programme {
 	}
 
 	private void calculateBest5Score(User user) {
-		List<Integer> scoreList = new ArrayList<Integer>();
+		List<Float> scoreList = new ArrayList<Float>();
 		for (Subject subject : subjectList) {
 			if (user.hasSubject(subject))
-				scoreList.add((int) subject.getWeighting() * user.getSubjectScore(subject));
+				scoreList.add(subject.getWeighting() * user.getSubjectScore(subject));
 		}
 		userScore += best5Score(scoreList);
 
 	}
 
-	private int bestScore(List<Integer> scoreList) {
+	private float bestScore(List<Float> scoreList) {
 		Collections.sort(scoreList, Collections.reverseOrder());
 		return scoreList.get(0);
 	}
 
-	private int best2Score(List<Integer> scoreList) {
+	private float best2Score(List<Float> scoreList) {
 		Collections.sort(scoreList, Collections.reverseOrder());
 		return scoreList.get(0) + scoreList.get(1);
 	}
 
-	private int best2Score(List<Integer> either1ScoreList, List<Integer> notCompulsoryScoreList) {
+	private float best2Score(List<Float> either1ScoreList, List<Float> notCompulsoryScoreList) {
 		int result = 0;
 		Collections.sort(either1ScoreList, Collections.reverseOrder());
 		result += either1ScoreList.get(0);
 		either1ScoreList.remove(0);
 
-		List<Integer> scoreList = new ArrayList<Integer>(either1ScoreList);
+		List<Float> scoreList = new ArrayList<Float>(either1ScoreList);
 		scoreList.addAll(notCompulsoryScoreList);
 		Collections.sort(scoreList, Collections.reverseOrder());
 		result += scoreList.get(0);
@@ -290,18 +291,18 @@ public class Programme {
 		return result;
 	}
 
-	private int best3Score(List<Integer> scoreList) {
+	private float best3Score(List<Float> scoreList) {
 		Collections.sort(scoreList, Collections.reverseOrder());
 		return scoreList.get(0) + scoreList.get(1) + scoreList.get(2);
 	}
 
-	private int best3Score(List<Integer> either1ScoreList, List<Integer> notCompulsoryScoreList) {
+	private float best3Score(List<Float> either1ScoreList, List<Float> notCompulsoryScoreList) {
 		int result = 0;
 		Collections.sort(either1ScoreList, Collections.reverseOrder());
 		result += either1ScoreList.get(0);
 		either1ScoreList.remove(0);
 
-		List<Integer> scoreList = new ArrayList<Integer>(either1ScoreList);
+		List<Float> scoreList = new ArrayList<Float>(either1ScoreList);
 		scoreList.addAll(notCompulsoryScoreList);
 		Collections.sort(scoreList, Collections.reverseOrder());
 		result += scoreList.get(0) + scoreList.get(1);
@@ -309,14 +310,14 @@ public class Programme {
 		return result;
 	}
 
-	private int best3ScoreWithEither2(List<Integer> either2ScoreList, List<Integer> notCompulsoryScoreList) {
+	private int best3ScoreWithEither2(List<Float> either2ScoreList, List<Float> notCompulsoryScoreList) {
 		int result = 0;
 		Collections.sort(either2ScoreList, Collections.reverseOrder());
 		result += either2ScoreList.get(0) + either2ScoreList.get(1);
 		either2ScoreList.remove(0);
 		either2ScoreList.remove(1);
 
-		List<Integer> scoreList = new ArrayList<Integer>(either2ScoreList);
+		List<Float> scoreList = new ArrayList<Float>(either2ScoreList);
 		scoreList.addAll(notCompulsoryScoreList);
 		Collections.sort(scoreList, Collections.reverseOrder());
 		result += scoreList.get(0);
@@ -324,18 +325,18 @@ public class Programme {
 		return result;
 	}
 
-	private int best4Score(List<Integer> scoreList) {
+	private float best4Score(List<Float> scoreList) {
 		Collections.sort(scoreList, Collections.reverseOrder());
 		return scoreList.get(0) + scoreList.get(1) + scoreList.get(2) + scoreList.get(3);
 	}
 
-	private int best4Score(List<Integer> either1ScoreList, List<Integer> notCompulsoryScoreList) {
+	private int best4Score(List<Float> either1ScoreList, List<Float> notCompulsoryScoreList) {
 		int result = 0;
 		Collections.sort(either1ScoreList, Collections.reverseOrder());
 		result += either1ScoreList.get(0);
 		either1ScoreList.remove(0);
 
-		List<Integer> scoreList = new ArrayList<Integer>(either1ScoreList);
+		List<Float> scoreList = new ArrayList<Float>(either1ScoreList);
 		scoreList.addAll(notCompulsoryScoreList);
 		Collections.sort(scoreList, Collections.reverseOrder());
 		result += scoreList.get(0) + scoreList.get(1) + scoreList.get(2);
@@ -343,14 +344,14 @@ public class Programme {
 		return result;
 	}
 
-	private int best4ScoreWithEither2(List<Integer> either2ScoreList, List<Integer> notCompulsoryScoreList) {
+	private int best4ScoreWithEither2(List<Float> either2ScoreList, List<Float> notCompulsoryScoreList) {
 		int result = 0;
 		Collections.sort(either2ScoreList, Collections.reverseOrder());
 		result += either2ScoreList.get(0) + either2ScoreList.get(1);
 		either2ScoreList.remove(0);
 		either2ScoreList.remove(1);
 
-		List<Integer> scoreList = new ArrayList<Integer>(either2ScoreList);
+		List<Float> scoreList = new ArrayList<Float>(either2ScoreList);
 		scoreList.addAll(notCompulsoryScoreList);
 		Collections.sort(scoreList, Collections.reverseOrder());
 		result += scoreList.get(0) + scoreList.get(1);
@@ -358,7 +359,7 @@ public class Programme {
 		return result;
 	}
 
-	private int best5Score(List<Integer> scoreList) {
+	private int best5Score(List<Float> scoreList) {
 		int result = 0;
 		Collections.sort(scoreList, Collections.reverseOrder());
 		for (int i = 0; i < 5; i++)
@@ -366,25 +367,25 @@ public class Programme {
 		return result;
 	}
 
-	private void fillScoreList(User user, List<Integer> notCompulsoryScoreList, List<Integer> either1ScoreList,
-			List<Integer> either2ScoreList) {
+	private void fillScoreList(User user, List<Float> notCompulsoryScoreList, List<Float> either1ScoreList,
+			List<Float> either2ScoreList) {
 		for (Subject subject : subjectList) {
 			switch (subject.isCompulsory()) {
 			case Compulsory:
 				if (user.hasSubject(subject))
-					userScore += (int) subject.getWeighting() * user.getSubjectScore(subject);
+					userScore += subject.getWeighting() * user.getSubjectScore(subject);
 				break;
 			case Either1:
 				if (user.hasSubject(subject))
-					either1ScoreList.add((int) subject.getWeighting() * user.getSubjectScore(subject));
+					either1ScoreList.add( subject.getWeighting() * user.getSubjectScore(subject));
 				break;
 			case Either2:
 				if (user.hasSubject(subject))
-					either2ScoreList.add((int) subject.getWeighting() * user.getSubjectScore(subject));
+					either2ScoreList.add( subject.getWeighting() * user.getSubjectScore(subject));
 				break;
 			default:
 				if (user.hasSubject(subject))
-					notCompulsoryScoreList.add((int) subject.getWeighting() * user.getSubjectScore(subject));
+					notCompulsoryScoreList.add( subject.getWeighting() * user.getSubjectScore(subject));
 				break;
 			}
 		}

@@ -26,13 +26,14 @@ public class ProgrammePreparator {
 			List<Programme> plist = new ArrayList<Programme>();
 			while(rs.next()){
 				List<Subject> slist = new ArrayList<Subject>();
-				Programme p = new Programme(rs.getString(1), rs.getString(2), rs.getFloat(4), rs.getFloat(5), rs.getString(6));
+				Programme p = new Programme(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getString(6));
+				int getSubjectCounter = 1;
 				for(int i=SubjectOffset; i<ColumnSize; i+=2){
 					Subject s;
 					String isCompulsory = rs.getString(i+1);
-					
-					s = new Subject(SubjectEnum.getSubject((i-8)/2),rs.getFloat(i), isCompulsory);
+					s = new Subject(SubjectEnum.getSubject(getSubjectCounter), rs.getFloat(i), isCompulsory);
 					slist.add(s);
+					getSubjectCounter++;
 				}
 				if(p.SetSubject(slist))
 					plist.add(p);
@@ -44,6 +45,18 @@ public class ProgrammePreparator {
 			System.out.println(e.getMessage());
 			return null;
 		}
-		
+	}
+	
+	public List<Programme> UpdateUserScore(List<Programme> list, User user){
+		try{
+			for(Programme p : list){
+				p.calculateUserScore(user);
+			}
+			return list;
+		} catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
+			
 	}
 }
