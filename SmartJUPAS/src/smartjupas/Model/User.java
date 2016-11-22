@@ -25,6 +25,10 @@ public class User {
 		return preferProgrammeType;
 	}
 	
+	public void setPreference(int preference){
+		preferProgrammeType = preference;
+	}
+	
 	public boolean addStudiedSubject(StudiedSubject s){
 		try{
 			StudiedSubject.add(s);

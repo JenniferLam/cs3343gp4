@@ -12,13 +12,13 @@ public class Programme {
 	private float competitors;
 	private float median;
 	private String formulaId;
-	private int divide;
+	private float divide;
 	private List<Subject> subjectList;
 
 	private float userScore;
 	private boolean eligibleForUser;
 
-	public Programme(String jscode, String name, int typeid, float competitors, float median, String formulaId) {
+	public Programme(String jscode, String name, int typeid, float competitors, float median, String formulaId, float divide) {
 		this.jscode = jscode;
 		this.name = name;
 		this.typeId = typeid;
@@ -27,6 +27,7 @@ public class Programme {
 		this.formulaId = formulaId;
 		this.eligibleForUser = true;
 		this.userScore = 0;
+		this.divide = divide;
 
 	}
 
@@ -89,7 +90,7 @@ public class Programme {
 		this.formulaId = formulaId;
 	}
 
-	public int getDivide() {
+	public float getDivide() {
 		return divide;
 	}
 
@@ -102,7 +103,7 @@ public class Programme {
 	}
 
 	public float getScoreDifferencePercentage() {
-		return (userScore - median) / median * 100;
+		return (userScore - (median*divide)) / (median*divide) * 100;
 	}
 
 	public void checkEligibleForUser(User user) {

@@ -30,7 +30,7 @@ public class Filter {
 		Collections.sort(outputProgrammeList, new Comparator<Programme>() {
 		      @Override
 		      public int compare(final Programme programme1, final Programme programme2) {
-		          return programme1.getJscode().compareTo(programme2.getJscode());
+		          return (int)(programme2.getScoreDifferencePercentage()-programme1.getScoreDifferencePercentage());
 		      }
 		  });
 	}
