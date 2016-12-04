@@ -6,6 +6,7 @@ import smartjupas.DAL.*;
 
 public class ProgrammePreparator {
 
+	private static ProgrammePreparator instance = new ProgrammePreparator();
 	private DBController db;
 	private final int ColumnSize = 55;
 	private final int SubjectOffset = 16;
@@ -14,8 +15,12 @@ public class ProgrammePreparator {
 	private String username = "gp4";
 	private String password = "cs3343";
 	
+
+	public static ProgrammePreparator getInstance(){
+		return instance;
+	}
 	
-	public ProgrammePreparator(){
+	private ProgrammePreparator(){
 		db = DBController.getInstance();
 		db.Initalize(dbS, username, password);
 	}
@@ -34,7 +39,7 @@ public class ProgrammePreparator {
 					String isCompulsory = rs.getString(i+1);
 					s = new Subject(SubjectEnum.getSubject(getCoreCounter), rs.getFloat(i), isCompulsory);
 					slist.add(s);
-					getCoreCounter++;
+					getCoreCounter++; 
 				}
 				for(int i=SubjectOffset; i<ColumnSize; i+=2){
 					Subject s;
@@ -53,19 +58,5 @@ public class ProgrammePreparator {
 			System.out.println(e.getMessage());
 			return null;
 		}
-	}
-	
-	public List<Programme> UpdateUserScore(List<Programme> list, User user){
-		try{
-			for(Programme p : list){
-				p.checkEligibleForUser(user);
-				p.calculateUserScore(user);
-			}
-			return list;
-		} catch (Exception e){
-			e.printStackTrace();
-			return null;
-		}
-			
 	}
 }

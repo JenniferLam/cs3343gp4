@@ -39,7 +39,18 @@ public class Programme {
 			System.out.println(e.getMessage());
 			return false;
 		}
-
+	}
+	
+	public List<Subject> getSubjectList(){
+		return subjectList;
+	}
+	
+	public void SetEligible(boolean isEligible){
+		this.eligibleForUser = isEligible;
+	}
+	
+	public boolean isEligible(){
+		return this.eligibleForUser;
 	}
 
 	public String getJscode() {
@@ -101,11 +112,20 @@ public class Programme {
 	public float getUserScore() {
 		return userScore;
 	}
+	
+	public void setUserScore(float s){
+		this.userScore = s;
+	}
+	
+	public void addUserScore(float s){
+		this.userScore += s;
+	}
 
 	public float getScoreDifferencePercentage() {
 		return (userScore - (median*divide)) / (median*divide) * 100;
 	}
-
+	
+/*Code refactoring
 	public void checkEligibleForUser(User user) {
 		List<Subject> either1SubjectList = new ArrayList<Subject>();
 		List<Subject> either2SubjectList = new ArrayList<Subject>();
@@ -174,6 +194,9 @@ public class Programme {
 				calculate1C4BScore(user);
 			} else if (formulaId.equals("2C3B")) {
 				calculate2C3BScore(user);
+			}
+			if(user.getPreference()==this.getTypeId()){
+				userScore+=5;
 			}
 
 		} else {
@@ -390,5 +413,5 @@ public class Programme {
 				break;
 			}
 		}
-	}
+	}*/
 }

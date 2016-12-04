@@ -1,8 +1,11 @@
-package smartjupas.Model;
+package smartjupas.BLL;
 
 import java.util.ArrayList;
 import java.util.*;
 import java.util.List;
+
+import smartjupas.Model.Programme;
+import smartjupas.Model.User;
 
 public class Filter {
 	public static List<Programme> FilterProgrammeByScore(List<Programme> programmeList, float percentage) {
@@ -16,10 +19,10 @@ public class Filter {
 		return outputProgrammeList;
 	}
 
-	public static List<Programme> FilterProgrammeByPreference(List<Programme> programmeList, int preference) {
+	public static List<Programme> FilterProgrammeByPreference(List<Programme> programmeList, User user) {
 		List<Programme> outputProgrammeList = new ArrayList<Programme>();
 		for (Programme p : programmeList) {
-			if(p.getTypeId() == preference)
+			if(p.getTypeId() == user.getPreference())
 				outputProgrammeList.add(p);
 		}
 		sortOutputProgrammeList(outputProgrammeList);

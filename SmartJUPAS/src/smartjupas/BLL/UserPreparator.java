@@ -7,6 +7,12 @@ import smartjupas.Model.*;
 public class UserPreparator {
 
 	private Scanner reader;
+	private static UserPreparator instance = new UserPreparator();
+	
+	
+	public static UserPreparator getInstance(){
+		return instance;
+	}
 	
 	public UserPreparator(){
 		reader = new Scanner(System.in);
@@ -14,9 +20,9 @@ public class UserPreparator {
 	
 	public User GenerateUser(){
 		int taken;
-		int preference;
-		User user = new User();
 		
+		User user = new User();
+		int preference;
 		System.out.println("Please input your HKDSE result(5**=7, 5*=6, 5=5, 4=4..., U=0)");
 		System.out.printf("Chinese: ");
 		user.addStudiedSubject(new StudiedSubject(SubjectEnum.CHIN, getInput("result")));
@@ -50,6 +56,7 @@ public class UserPreparator {
 		return user;
 	}
 	
+	
 	private int getInput(String type){
 		//type: result, electiveN, preference
 		try{
@@ -81,7 +88,7 @@ public class UserPreparator {
 			case "preference":
 				do{
 					r = reader.nextInt();
-					if(r>=1 && r<=51)
+					if(r>=1 && r<=7)
 						valid = true;
 					else{
 						valid = false;

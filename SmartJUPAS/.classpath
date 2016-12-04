@@ -3,6 +3,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Ray Wong/Desktop/CS3343Git/cs3343gp4/SmartJUPAS/sqljdbc4-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tomato Bread/Documents/CityU/Year 3 Sem A/CS3343 Software Engineering Practice/Project/SmartJUPAS/sqljdbc4-2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

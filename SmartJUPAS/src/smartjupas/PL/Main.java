@@ -9,35 +9,34 @@ import java.io.*;
 
 public class Main {
 
-	
-	
 	public static void main(String[] args){
 
-		ProgrammePreparator ProgrammePreparator = new ProgrammePreparator();
-		UI ui = new UI();
+		ProgrammePreparator _ProgrammePreparator = ProgrammePreparator.getInstance();
+		Calculator _ProgrammeCalculator = Calculator.getInstance();
+		UI _UI = UI.getInstance(); 
+		
 		User user;
 		List<Programme> ProgrammeList;
 		List<Programme> OutputList;
 		
-		
-		ui.CreateMenu();
-		user = ui.getUserInput();
+		_UI.CreateMenu();
+		user = _UI.getUserInput();
 		
 		//Testing by Ray
 		//Scanner reader = new Scanner(System.in);
 		//user.setPreference(reader.nextInt());
 		
-		ProgrammeList = ProgrammePreparator.PrepareList();
+		ProgrammeList = _ProgrammePreparator.PrepareList();
 		
 		//Update user score for each programme
-		OutputList = ProgrammePreparator.UpdateUserScore(ProgrammeList, user);
-		
-		//Filter by score
-		OutputList = Filter.FilterProgrammeByScore(OutputList, -10);
+		OutputList = _ProgrammeCalculator.CalculateUserScore(ProgrammeList, user);
 		
 		//Filter by preference
-		OutputList = Filter.FilterProgrammeByPreference(OutputList, user.getPreference());
+		OutputList = Filter.FilterProgrammeByPreference(OutputList, user);
 		
-		ui.GenerateOutput(OutputList);
-	}
+		//Filter by score
+		OutputList = Filter.FilterProgrammeByScore(OutputList, -10);		
+		
+		_UI.GenerateOutput(OutputList);
+	}  
 }
